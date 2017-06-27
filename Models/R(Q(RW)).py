@@ -1,5 +1,5 @@
 """
-Model script for R + (Q || (R + W))
+Model script for Rs + (Q || (Rf + W))
 """
 import numpy as np
 from collections import OrderedDict

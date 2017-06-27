@@ -89,18 +89,33 @@ def do_fit(modelName, filename):
             with open(path.join(storePath, 'paras.txt'), mode='a', encoding='utf-8') as f:
                 for key in keys:
                     print(str(key), file=f, end='\t')
-                    # 在这里加上potential
+                # 在这里加上potential和capacity
+                if modelName == "R(Q(RW))":
+                    print("Capacity_d",file=f,end='\t')
                 print("potential", file=f)
-        # 写入parade的值
+        # 写入para的值
+        # 对R(Q(RW))模型，序号为 Rs,Yq,n,Rf,W
+        # Cd = Y0**(1/n) * ( (Rs+Rp)/Rs*Rp **(1-1/n) )
+        if modelName=="R(Q(RW))":
+            capacityD = ( params[1] ** (1. / params[2]) )  * \
+                    ( (params[0] + params[3]) / (params[0] * params[3])) ** (1 - 1. / params[2])
+
+
         with open(path.join(storePath, 'paras.txt'), mode='a', encoding='utf-8') as f:
             for para in params:
                 print(str(para), file=f, end='\t')
+            if modelName == "R(Q(RW))":
+                print("%.15f" % capacityD, file=f, end='\t')
             print("%.3f"%potential, file=f)
+
 
         # 输出模拟值
         zOmega = np.array([2.0 * np.pi * f for f in freq])
         zFited = model.model(zOmega, params)
         phase = np.array([np.rad2deg(np.arctan(z.imag / z.real)) for z in zFited])
+
+
+
         originFilename = path.split(filename)[1]
         fittedPath = path.join(storePath, "fitedData/")
         if not path.exists(fittedPath):

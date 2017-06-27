@@ -32,11 +32,11 @@ def model(w,params):
      #  fit to the data points.  Modify it to represent the circuit you
      #  want to fit to the data.
      # Zq = 1 / ( Yq * (1j * w)**n )
-     Zc = 1 / (1j*w) 
+     Zc = 1 / (1j*w*C)
      # Zrw = Rf + Zw
      Yp = 1/Zc + 1/Rf
      Z = Rs + 1/Yp
 
-     print(Z)
+     # print(Z)
 
      return Z
