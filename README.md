@@ -7,7 +7,13 @@ Electrochemical Impendance Spectrscopy Equivalent Circle fitting package
 - **[Pandas](http://pandas.pydata.org/) >= latest**
 - [Matplotlib](http://matplotlib.org/) >= 2.x
 
+# Data Format   
+|Potential [1]| Frequency | Zreal | Zimag|
+|--------------|-----------|-------|------|
+|0.1 | 10000| 100| 100 | 100|   
 
+
+[1]: POTENTION Position is defined at head of Zfit.py
 # Usage: 
 ```
 py Zfit.py
